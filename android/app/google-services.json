@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "971613435836",
+    "project_id": "sseup-e4d44",
+    "storage_bucket": "sseup-e4d44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971613435836:android:49932d9cf492440aff9db9",
+        "android_client_info": {
+          "package_name": "com.react_navigation_01"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "971613435836-pa2s6hl7td9fbimtgrnluodtvaneg79u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmeRPmaMK-MmGRqSF4qDoXD0oueAPifQo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "971613435836-pa2s6hl7td9fbimtgrnluodtvaneg79u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
