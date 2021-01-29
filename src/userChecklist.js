@@ -43,16 +43,16 @@ class userChecklist extends Component {
   makeChecklist = () => {
     return checklistContents.map((mem, key) => (
       <View style={styles.check} key={key}>
-      <View style={{flex:9}}>
-        <Text style={styles.texts}>{mem}</Text>
+        <View style={{flex:9}}>
+          <Text style={styles.texts}>{mem}</Text>
+        </View>
+        <View style={{flex:1}}>
+          <CheckBox
+          value={this.state.checklist[key]}
+          onValueChange={()=> this.setChecklist(key)}
+          />
+        </View>
       </View>
-      <View style={{flex:1}}>
-        <CheckBox
-        value={this.state.checklist[key]}
-        onValueChange={()=> this.setChecklist(key)}
-        />
-      </View>
-    </View>
     ))
   }
   render (){
@@ -64,18 +64,18 @@ class userChecklist extends Component {
           alignItems: 'stretch',
       }}>
         <View>{this.makeChecklist()}</View>
-        {/* <Text style={{fontSize:20}}>Your score: {this.sumChecklist()}0</Text> */}
-        <View style={{paddingTop:60}}><Button
-          title="완료"
-          onPress={()=>{
-              let a = this.sumChecklist();
-              let b = this.state.checklist;
-              this.props.navigation.navigate(
-                '레포트', 
-                {
-                  yourScore: a,
-                  detailedScoring: b
-                });
+        <View style={{paddingTop:60}}>
+          <Button
+            title="완료"
+            onPress={()=>{
+                let a = this.sumChecklist();
+                let b = this.state.checklist;
+                this.props.navigation.navigate(
+                  '레포트', 
+                  {
+                    yourScore: a,
+                    detailedScoring: b
+                  });
           }}
         />
         </View>

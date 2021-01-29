@@ -3,21 +3,19 @@ import React, {Component} from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Icons from 'react-native-vector-icons/dist/Ionicons';
 
+
 class userVideo extends Component {
   render (){
     return(
-      <View>
-        <View style={styles.videoElementView}>
-            <Icons name="play-circle-outline" size={60} color="blue"/>
+        <View>
+          <TouchableOpacity
+              style={styles.buttonElementView}
+              onPress={()=>{
+              this.props.navigation.navigate('userChecklist')}}
+          >
+              <Text style={{fontSize:20}}>내 영상 촬영하기</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-            style={styles.buttonElementView}
-            onPress={()=>{
-            this.props.navigation.navigate('userChecklist')}}
-        >
-            <Text style={{fontSize:20}}>영상 촬영</Text>
-        </TouchableOpacity>
-      </View>
     )
   }
 }

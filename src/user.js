@@ -2,6 +2,7 @@ import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import { StyleSheet, View, Text, Button, TouchableOpacity } from 'react-native';
 import Icons from 'react-native-vector-icons/dist/Ionicons';
+import VideoPlayer from './VideoPlayer';
 
 class UserScreen extends Component {
   render (){
@@ -11,15 +12,18 @@ class UserScreen extends Component {
           alignItems: 'center',
           justifyContent: 'center'
       }}>
-        <View style={styles.videoElementView}>
-            <Icons name="play-circle-outline" size={60} color="blue"/>
+        <View style={{flex:7, height: 300, width: 300, marginTop:100}}>
+            {/* <Icons name="play-circle-outline" size={60} color="blue"/> */}
+            <VideoPlayer />
         </View>          
-        <Button
-          title="To Home Screen"
-          onPress={()=>{
-              this.props.navigation.navigate('Home')
-          }}
-        />
+        <View style={{flex:3}}>
+          <Button
+            title="To Home Screen"
+            onPress={()=>{
+                this.props.navigation.navigate('Home')
+            }}
+          />
+        </View>
       </View>
     )
   }
