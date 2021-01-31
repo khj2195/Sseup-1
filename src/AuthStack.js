@@ -3,7 +3,6 @@ import {View} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import LoginScreen from './LoginScreen';
 import SignupScreen from './SignupScreen';
-// import AsyncStorage from '@react-native-community/async-storage';
 
 const Stack = createStackNavigator();
 

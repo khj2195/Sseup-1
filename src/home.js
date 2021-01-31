@@ -6,9 +6,6 @@ import firstTab from './firstTab';
 import secondTab from './secondTab';
 import thirdTab from './thirdTab';
 import Icons from 'react-native-vector-icons/dist/Ionicons';
-// import userChecklist from './userChecklist';
-// import scoreContext from './scoreContext';
-
 
 const Tab = createBottomTabNavigator();
 
@@ -44,19 +41,6 @@ class HomeScreenTab extends Component {
       <Tab.Screen name="홈" component={firstTab} />
       <Tab.Screen name="레포트" component={secondTab}/>
       <Tab.Screen name="MY" component={thirdTab} />
-      {/* <View style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center'
-      }}>
-          <Text>Home Screen</Text>
-          <Button
-            title="To User Screen"
-            onPress={()=>{
-                this.props.navigation.navigate('User')
-            }}
-          />
-      </View> */}
     </Tab.Navigator>
     )
   }

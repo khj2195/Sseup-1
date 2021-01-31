@@ -5,12 +5,13 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 class firstTab extends Component {
 
   render (){
-    // const {score}=this.props.route;
+    const {params} = this.props.route;
+    const yourScore = params ? params.yourScore : null;
     return(
     <View style={{backgroundColor: 'white', height:'100%'}}>
       <View style={styles.homeFirstElementView}>
-          <Text style={{fontSize:20, color:'white'}}>ID님의 흡입기 사용점수:</Text>
-          <Text style={{fontSize:25, color:'white'}}>00점</Text>
+          <Text style={{fontSize:20, color:'white'}}>당신의 흡입기 사용점수:</Text>
+          <Text style={{fontSize:25, color:'white'}}>{yourScore}0점</Text>
       </View>
       <TouchableOpacity
         style={styles.homeElementView}

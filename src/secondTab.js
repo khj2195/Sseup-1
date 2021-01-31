@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import React, {Component} from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import FormButton from './components/FormButton';
 
 const checklistContents = 
   [
@@ -33,41 +34,36 @@ class secondTab extends Component {
     const {params} = this.props.route;
     const yourScore = params ? params.yourScore : null;
     const detailedScoring = params ? params.detailedScoring : null;
-
-    return(
-      <View style={styles.homeElementView}>
-          {/* <Text style={{fontSize:25}}>SUMMARY</Text> */}
-          <Text style={{fontSize:20}}>ID님의 흡입기 사용점수는</Text>
+    if(yourScore===null){
+      return(
+        <View style={styles.homeElementView}>
+          <Text style={{fontSize:20}}>당신의 흡입기 사용을 평가해주세요.</Text>
+        </View>
+      )
+    }
+    else return(
+      <ScrollView style={styles.homeElementView}>
+          <Text style={{fontSize:20}}>당신의 흡입기 사용점수는</Text>
           <Text style={{fontSize:40}}>{JSON.stringify(yourScore)}0점</Text>
           <Text></Text>
-          <Text style={{fontSize:20}}>ID님이 잘못 시행한 단계</Text>
+          <Text style={{fontSize:20}}>당신이 잘못 시행한 단계</Text>
           <Text></Text>
           <View>{listMistakes(detailedScoring)}</View>
-      </View>
+          <FormButton
+            buttonTitle="확인"
+            onPress={() => this.props.navigation.navigate('홈', {
+              yourScore: yourScore,
+            })}
+          />
+      </ScrollView>
     )
   }
 }
 
 const styles= StyleSheet.create({
-  homeFirstElementView: {
-    marginTop:20,
-    marginBottom:20,
-    marginLeft: 15,
-    marginRight: 15,
-    padding: 30,
-    flex:1,
-    backgroundColor: 'steelblue',
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 5,
-      height: 10,  
-    },
-    elevation: 15,
-  },
   homeElementView: {
-    marginTop:20,
-    marginBottom:20,
+    marginTop:10,
+    marginBottom:10,
     marginLeft: 12,
     marginRight: 12,
     padding: 20,

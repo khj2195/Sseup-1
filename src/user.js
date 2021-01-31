@@ -1,29 +1,36 @@
 import 'react-native-gesture-handler';
 import React, {Component} from 'react';
-import { StyleSheet, View, Text, Button, TouchableOpacity } from 'react-native';
-import Icons from 'react-native-vector-icons/dist/Ionicons';
-import VideoPlayer from './VideoPlayer';
+import { StyleSheet, View, Text, Button, TouchableOpacity, Dimensions } from 'react-native';
+import FormButton from './components/FormButton';
+import Video from 'react-native-video';
+
+const windowHeight = Dimensions.get('window').height;
+const windowWidth = Dimensions.get('window').width;
 
 class UserScreen extends Component {
+  
   render (){
     return(
-      <View style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center'
-      }}>
-        <View style={{flex:7, height: 300, width: 300, marginTop:100}}>
-            {/* <Icons name="play-circle-outline" size={60} color="blue"/> */}
-            <VideoPlayer />
-        </View>          
-        <View style={{flex:3}}>
-          <Button
-            title="To Home Screen"
-            onPress={()=>{
-                this.props.navigation.navigate('Home')
-            }}
-          />
-        </View>
+        <View style={{height: windowHeight/2, width: windowWidth, marginTop:30}}>
+            <Video 
+              source={require('./assets/videos/DryingLime.mp4')}   // Can be a URL or a local file.
+              ref={(ref) => {
+                this.player = ref
+              }}                                      // Store reference
+              onBuffer={this.onBuffer}                // Callback when remote video is buffering
+              onError={this.videoError}               // Callback when video cannot be loaded
+              style={styles.backgroundVideo} 
+              paused={this.paused}
+              resizeMode='contain'
+            />
+            <View>
+              <FormButton
+                buttonTitle="내 영상 촬영하기"
+                onPress={()=>{
+                    this.props.navigation.navigate('userVideo')
+                }}
+              />
+            </View>
       </View>
     )
   }
@@ -46,7 +53,14 @@ const styles= StyleSheet.create({
         height: 10,  
       },
       elevation: 15
-  }
+  },
+  backgroundVideo: {
+    position: 'absolute',
+    top: 20,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
 });
 
 

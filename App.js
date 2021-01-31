@@ -6,8 +6,8 @@
  * @flow strict-local
  */
 import 'react-native-gesture-handler';
-import React, {Component} from 'react';
-// import { StyleSheet, View, Text, Image } from 'react-native';
+import React, {Component, useEffect} from 'react';
+import { StyleSheet, View, Text, Image } from 'react-native';
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
 // import HomeScreenTab from './src/home';
@@ -17,11 +17,30 @@ import React, {Component} from 'react';
 // import firebases from '@react-native-firebase/app';
 // import auth from '@react-native-firebase/auth';
 // import { useState, useEffect } from 'react';
-
+// import firebases from '@react-native-firebase/app';
 import { AuthProvider } from './src/AuthProvider';
 import Route from './src/Route';
 
 const App = () => {
+  // const firebaseConfig ={
+  //   projectId: 'sseup-e4d44',
+  //   apiKey: 'AIzaSyAmeRPmaMK-MmGRqSF4qDoXD0oueAPifQo',
+  //   authDomain: 'sseup-e4d44.firebaseapp.com',
+  //   databaseURL: 'https://sseup-e4d44.firebaseio.com',
+  //   storageBucket: 'sseup-e4d44.appspot.com',
+  //   appID: '1:971613435836:android:49932d9cf492440aff9db9',
+  // };
+
+  // firebases.initializeApp(firebaseConfig);
+  // useEffect(()=> {
+  //   return(
+  //     <Image
+  //         source={require('./src/assets/images/SSeup_entire_logo.jpg')}
+  //         style={{resizeMode:'cover'}}
+  //     />
+  //   );
+  // },[]);
+
   return (
     <AuthProvider>
       <Route />

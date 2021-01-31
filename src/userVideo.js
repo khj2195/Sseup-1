@@ -1,7 +1,6 @@
 import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import Icons from 'react-native-vector-icons/dist/Ionicons';
 
 
 class userVideo extends Component {
@@ -40,7 +39,7 @@ const styles= StyleSheet.create({
         elevation: 15,
     },
     buttonElementView: {
-        marginTop:10,
+        marginTop:180,
         marginBottom:100,
         marginLeft: 15,
         marginRight: 15,

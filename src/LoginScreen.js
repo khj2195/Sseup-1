@@ -45,7 +45,7 @@ const LoginScreen = ({navigation}) => {
       />
 
       <FormButton
-        buttonTitle="Sign In"
+        buttonTitle="Log In"
         onPress={() => 
           login(email, password)
         }
