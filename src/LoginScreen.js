@@ -17,7 +17,7 @@ const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const {login} = useContext(AuthContext);
+  const {login, submitUser} = useContext(AuthContext);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -47,7 +47,9 @@ const LoginScreen = ({navigation}) => {
       <FormButton
         buttonTitle="Log In"
         onPress={() => 
-          login(email, password)
+          {login(email, password);
+          //  submitUser(email,email,0);
+          }
         }
       />
 

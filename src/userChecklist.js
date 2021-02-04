@@ -1,7 +1,9 @@
 import 'react-native-gesture-handler';
-import React, {Component} from 'react';
+import React, {useContext, useState} from 'react';
 import { StyleSheet, ScrollView, View, Text, Button, TouchableOpacity } from 'react-native';
 import FormButton from './components/FormButton';
+import {AuthContext} from './AuthProvider';
+import auth from '@react-native-firebase/auth';
 
 
 const checklistContents = 
@@ -18,60 +20,25 @@ const checklistContents =
     "10. 흡입 후 6~10초간 숨을 참았는가?",
     "11. 사용 후 양치나 가글을 하였는가?",
   ]
-const checklist= [false, false, false, false, false, false, false, false, false, false, false]
+var checklist= [false, false, false, false, false, false, false, false, false, false, false]
 
-class userChecklist extends Component {
-  state= {
-    forUpdate:true
-  }
-  setChecklist = (index) => {
+const userChecklist =({navigation})=> {
+  const {Id, Name, InhalerType, submitUser, saveUser} = useContext(AuthContext);
+  const [Value, setValue]=useState(0);
+  const setChecklist = (index) => {
     checklist[index]=true;
-
-    this.setState({state:this.state})
-    // this.setState({
-    //   checklist: this.state.checklist.map(
-    //     (num,key) => {
-    //       return key === index ? !num : num;
-    //     }
-    //   )
-    // })
   }
-  unsetChecklist = (index) => {
+  const unsetChecklist = (index) => {
     checklist[index]=false;
-    // checklist.map((num,key) => {
-    //   return key === index ? false : num;
-    // })
-    this.setState({state:this.state})
-    // this.setState({
-    //   checklist: this.state.checklist.map(
-    //     (num,key) => {
-    //       return key === index ? false : num;
-    //     }
-    //   )
-    // })
   }
-  sumChecklist = () => {
+  const sumChecklist = () => {
     let sum=0;
     for (const iterator of checklist) {
       sum += iterator;
     }
     return sum;
   }
-  makeChecklist = () => {
-    // return checklistContents.map((mem, key) => (
-    //   <View style={styles.check} key={key}>
-    //     <View style={{flex:9}}>
-    //       <Text style={styles.texts}>{mem}</Text>
-    //     </View>
-    //     <View style={{flex:1}}>
-    //       <CheckBox
-    //       value={this.state.checklist[key]}
-    //       onValueChange={()=> this.setChecklist(key)}
-    //       />
-    //     </View>
-    //   </View>
-    // ))
-
+  const makeChecklist = () => {
     return checklistContents.map((mem, key) => (
       <View style={{flex:1, padding: 10, flexDirection:'column'}} key={key}>
         <View style={{flex:1, AlignItems:'stretch'}}>
@@ -80,7 +47,13 @@ class userChecklist extends Component {
         <View style={{flex:1, flexDirection:'row'}}>
           <View style={{flex:5}}>
             <TouchableOpacity
-              onPress={()=> this.setChecklist(key)}
+              onPress={()=> 
+                {
+                  setChecklist(key);
+                  setValue(Value+1);
+                  console.log(checklist);
+                }
+              }
               style={{backgroundColor: checklist[key]? '#ABB8C3':'#FFF', alignItems:'center'}}
             >
                 <Text style={{fontSize:18}}>Yes</Text>
@@ -88,7 +61,12 @@ class userChecklist extends Component {
           </View>
           <View style={{flex:5}}>
             <TouchableOpacity
-              onPress={()=> this.unsetChecklist(key)}
+              onPress={()=> 
+                {
+                  unsetChecklist(key);
+                  setValue(Value+1);
+                }
+              }
               style={{backgroundColor: '#FFF', alignItems:'center'}}
             >
                 <Text style={{fontSize:18}}>No</Text>
@@ -97,36 +75,150 @@ class userChecklist extends Component {
         </View>
       </View>
     ))
-
   }
-  render (){
-    console.log(checklist)
-    return(
-      <View>
+  // useEffect(()=>{
+  //   console.log(checklist);
+  //   makeChecklist();
+  //   return()=>{
+  //     console.log(checklist);
+  //   }
+  // },[checklist]);
+
+  return(
       <ScrollView style={{
           paddingBottom: 30,
           flexDirection: 'column',
       }}>
-        {this.makeChecklist()}
+        {makeChecklist()}
         <FormButton
           buttonTitle="완료"
           onPress={()=>{
-              let a = this.sumChecklist();
+              let a = sumChecklist();
               let b = checklist;
-              this.props.navigation.navigate(
+              navigation.navigate(
                 '레포트', 
                 {
                   yourScore: a,
                   detailedScoring: b
                 });
+              // submitUser(Id, InhalerType, checklist);
+              saveUser(Id, InhalerType, checklist);
+              checklist=[false, false, false, false, false, false, false, false, false, false, false];
+              console.log(checklist);
           }}
         />
       </ScrollView>
-      
-    </View>
-    )
-  }
+  )
 }
+
+// class userChecklist extends Component {
+//   state= {
+//     forUpdate:true
+//   }
+//   setChecklist = (index) => {
+//     checklist[index]=true;
+
+//     this.setState({state:this.state})
+//     // this.setState({
+//     //   checklist: this.state.checklist.map(
+//     //     (num,key) => {
+//     //       return key === index ? !num : num;
+//     //     }
+//     //   )
+//     // })
+//   }
+//   unsetChecklist = (index) => {
+//     checklist[index]=false;
+//     // checklist.map((num,key) => {
+//     //   return key === index ? false : num;
+//     // })
+//     this.setState({state:this.state})
+//     // this.setState({
+//     //   checklist: this.state.checklist.map(
+//     //     (num,key) => {
+//     //       return key === index ? false : num;
+//     //     }
+//     //   )
+//     // })
+//   }
+//   sumChecklist = () => {
+//     let sum=0;
+//     for (const iterator of checklist) {
+//       sum += iterator;
+//     }
+//     return sum;
+//   }
+//   makeChecklist = () => {
+//     // return checklistContents.map((mem, key) => (
+//     //   <View style={styles.check} key={key}>
+//     //     <View style={{flex:9}}>
+//     //       <Text style={styles.texts}>{mem}</Text>
+//     //     </View>
+//     //     <View style={{flex:1}}>
+//     //       <CheckBox
+//     //       value={this.state.checklist[key]}
+//     //       onValueChange={()=> this.setChecklist(key)}
+//     //       />
+//     //     </View>
+//     //   </View>
+//     // ))
+
+//     return checklistContents.map((mem, key) => (
+//       <View style={{flex:1, padding: 10, flexDirection:'column'}} key={key}>
+//         <View style={{flex:1, AlignItems:'stretch'}}>
+//           <Text style={styles.texts}>{mem}</Text>
+//         </View>
+//         <View style={{flex:1, flexDirection:'row'}}>
+//           <View style={{flex:5}}>
+//             <TouchableOpacity
+//               onPress={()=> this.setChecklist(key)}
+//               style={{backgroundColor: checklist[key]? '#ABB8C3':'#FFF', alignItems:'center'}}
+//             >
+//                 <Text style={{fontSize:18}}>Yes</Text>
+//             </TouchableOpacity>
+//           </View>
+//           <View style={{flex:5}}>
+//             <TouchableOpacity
+//               onPress={()=> this.unsetChecklist(key)}
+//               style={{backgroundColor: '#FFF', alignItems:'center'}}
+//             >
+//                 <Text style={{fontSize:18}}>No</Text>
+//             </TouchableOpacity>
+//           </View>
+//         </View>
+//       </View>
+//     ))
+
+//   }
+//   render (){
+//     console.log(checklist)
+//     return(
+//       <View>
+//       <ScrollView style={{
+//           paddingBottom: 30,
+//           flexDirection: 'column',
+//       }}>
+//         {this.makeChecklist()}
+//         <FormButton
+//           buttonTitle="완료"
+//           onPress={()=>{
+//               let a = this.sumChecklist();
+//               let b = checklist;
+//               this.props.navigation.navigate(
+//                 '레포트', 
+//                 {
+//                   yourScore: a,
+//                   detailedScoring: b
+//               });
+//               submitUser
+//           }}
+//         />
+//       </ScrollView>
+      
+//     </View>
+//     )
+//   }
+// }
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 10, paddingTop: 30, backgroundColor: '#fff' },

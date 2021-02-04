@@ -20,6 +20,11 @@ const AuthStack = () => {
             component={SignupScreen}
             options={{header: () => null}}
         />
+        {/* <Stack.Screen
+            name="ChooseInhaler"
+            component={ChooseInhalerScreen}
+            options={{header: () => null}}
+        /> */}
     </Stack.Navigator>
     )
 };
