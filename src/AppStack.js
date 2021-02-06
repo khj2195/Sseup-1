@@ -7,12 +7,13 @@ import UserScreen from './user';
 import userVideo from './userVideo';
 import userChecklist from './userChecklist';
 import ChooseInhalerScreen from './ChooseInhalerScreen';
-import { AuthContext } from './AuthProvider';
+import { UserContext } from './HandleUser';
+
 
 const Stack = createStackNavigator();
 
 const AppStack =() => {
-    const {InhalerType} = useContext(AuthContext);
+    const {InhalerType} = useContext(UserContext);
 
         // const logoTitle = () =>{
         // return(
@@ -30,6 +31,7 @@ const AppStack =() => {
     return(
         <Stack.Navigator
             initialRouteName = { InhalerType>0 ? "Home": "ChooseInhaler"}
+            // initialRouteName = "ChooseInhaler"
         >
             <Stack.Screen 
             name="Home" 

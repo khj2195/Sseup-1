@@ -4,13 +4,14 @@ import auth from '@react-native-firebase/auth';
 import {AuthContext} from './AuthProvider';
 import AuthStack from './AuthStack';
 import AppStack from './AppStack';
+import {HandleUser} from './HandleUser';
 
 const Route = () => {
   const {users, setUsers} = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
 
-  const onAuthStateChanged = (user) => {
-    setUsers(user);
+  const onAuthStateChanged = (users) => {
+    setUsers(users);
     if (initializing) setInitializing(false);
   };
 
@@ -23,7 +24,8 @@ const Route = () => {
 
   return (
     <NavigationContainer>
-      {users ? <AppStack /> : <AuthStack />}
+      {users ? <HandleUser><AppStack /></HandleUser> : <AuthStack />}
+      {/* {users ? <AppStack /> : <AuthStack />} */}
     </NavigationContainer>
   );
 };

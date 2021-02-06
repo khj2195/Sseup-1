@@ -1,6 +1,9 @@
 import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import auth from '@react-native-firebase/auth';
+
+const emailID= auth().currentUser.email.split("@")[0];
 
 class firstTab extends Component {
 
@@ -10,7 +13,7 @@ class firstTab extends Component {
     return(
     <View style={{backgroundColor: 'white', height:'100%'}}>
       <View style={styles.homeFirstElementView}>
-          <Text style={{fontSize:20, color:'white'}}>당신의 흡입기 사용점수:</Text>
+          <Text style={{fontSize:20, color:'white'}}>{emailID}님의 흡입기 사용점수:</Text>
           <Text style={{fontSize:25, color:'white'}}>{yourScore}0점</Text>
       </View>
       <TouchableOpacity

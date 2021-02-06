@@ -44,7 +44,6 @@ const SignupScreen = ({navigation}) => {
       <FormButton
         buttonTitle="Sign Up"
         onPress={() => {register(email, password);
-                        submitUser(email,email,0);
                         console.log('Registered!!');}}
                         // navigation.navigate('ChooseInhaler');}}
       />
