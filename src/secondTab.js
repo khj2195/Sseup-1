@@ -2,7 +2,9 @@ import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import FormButton from './components/FormButton';
+import auth from '@react-native-firebase/auth';
 
+const emailID= auth().currentUser.email.split("@")[0];
 const checklistContents = 
   [
     "- 흡입기를 잘 흔들었는가?",
@@ -43,7 +45,7 @@ class secondTab extends Component {
     }
     else return(
       <ScrollView style={styles.homeElementView}>
-          <Text style={{fontSize:20}}>당신의 흡입기 사용점수는</Text>
+          <Text style={{fontSize:20}}>{emailID}님의 흡입기 사용점수는</Text>
           <Text style={{fontSize:40}}>{JSON.stringify(yourScore)}0점</Text>
           <Text></Text>
           <Text style={{fontSize:20}}>당신이 잘못 시행한 단계</Text>

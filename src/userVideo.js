@@ -6,29 +6,29 @@ import {launchCamera} from 'react-native-image-picker';
 // const emptyCamera = './assets/images/emptyCamera_image.png';
 
 class userVideo extends Component {
-  state={
-    myVideo:'./assets/images/emptyCamera_image.png',
-  }
-  addImage = () => {
-    console.log(this.state.myVideo)
-    launchCamera({mediaType:'photo', maxHeight:300, maxWidth:300}, (response) => {
-      this.setState({
-        myVideo: response.uri,
-      })
-    })
-  }
+  // addImage = () => {
+  //   console.log(this.state.myVideo)
+  //   launchCamera({mediaType:'photo', maxHeight:300, maxWidth:300}, (response) => {
+  //     this.setState({
+  //       myVideo: response.uri,
+  //     })
+  //   })
+  // }
   render (){
     return(
         <View style={styles.container}>
           <Image
-            source={{uri: this.state.myVideo}}
-            style={{width:'90%', height: 300, resizeMode:'contain', marginTop:70}}
+            source={require('./assets/images/emptyCamera_image.jpg')}
+            style={{width:'70%', height: 200, resizeMode:'contain', marginTop:70}}
           />
           <TouchableOpacity
               style={styles.buttonElementView}
               onPress={()=>{
-                this.addImage()}}
-                // this.props.navigation.navigate('userChecklist')}}
+                launchCamera({mediaType:'video',maxHeight:300, maxWidth:300}, (response)=>{
+                  if (response.error) {
+                  console.log('LaunchCamera Error: ', response.error);
+                  }});
+              }}
           >
               <Text style={{fontSize:20}}>내 영상 촬영하기</Text>
           </TouchableOpacity>

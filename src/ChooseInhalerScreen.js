@@ -11,11 +11,11 @@ import {
 } from 'react-native';
 import FormInput from './components/FormInput';
 import FormButton from './components/FormButton';
-import { AuthContext } from './AuthProvider';
+import { UserContext } from './HandleUser';
 
 
 const ChooseInhalerScreen = ({navigation}) => {
-  const {InhalerType, setInhalerType} = useContext(AuthContext);
+  const {InhalerType, setInhalerType} = useContext(UserContext);
   return (
     <View style={styles.container}>
     <Text style={{fontSize: 16, fontWeight: '500', color: 'black', fontFamily: 'Lato-Regular',}}>
@@ -39,7 +39,7 @@ const ChooseInhalerScreen = ({navigation}) => {
             console.log(InhalerType);  
           }}>
         <Image
-        source={require('./assets/images/Seretide_diskus.png')}
+        source={require('./assets/images/Seretide_diskus.jpg')}
         style={styles.inhaler}
       />
     </TouchableOpacity>

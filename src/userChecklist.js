@@ -2,7 +2,8 @@ import 'react-native-gesture-handler';
 import React, {useContext, useState} from 'react';
 import { StyleSheet, ScrollView, View, Text, Button, TouchableOpacity } from 'react-native';
 import FormButton from './components/FormButton';
-import {AuthContext} from './AuthProvider';
+// import {AuthContext} from './AuthProvider';
+import { UserContext } from './HandleUser';
 import auth from '@react-native-firebase/auth';
 
 
@@ -23,7 +24,7 @@ const checklistContents =
 var checklist= [false, false, false, false, false, false, false, false, false, false, false]
 
 const userChecklist =({navigation})=> {
-  const {Id, Name, InhalerType, submitUser, saveUser} = useContext(AuthContext);
+  const {Id, InhalerType, submitUser, saveUser} = useContext(UserContext);
   const [Value, setValue]=useState(0);
   const setChecklist = (index) => {
     checklist[index]=true;
@@ -76,14 +77,6 @@ const userChecklist =({navigation})=> {
       </View>
     ))
   }
-  // useEffect(()=>{
-  //   console.log(checklist);
-  //   makeChecklist();
-  //   return()=>{
-  //     console.log(checklist);
-  //   }
-  // },[checklist]);
-
   return(
       <ScrollView style={{
           paddingBottom: 30,
@@ -104,7 +97,6 @@ const userChecklist =({navigation})=> {
               // submitUser(Id, InhalerType, checklist);
               saveUser(Id, InhalerType, checklist);
               checklist=[false, false, false, false, false, false, false, false, false, false, false];
-              console.log(checklist);
           }}
         />
       </ScrollView>
